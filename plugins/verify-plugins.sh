@@ -1,0 +1,1 @@
+# checksums/signatures für plugins

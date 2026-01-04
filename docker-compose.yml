@@ -1,0 +1,22 @@
+services:
+  moodleapp:
+    build:
+      context: .
+    image: moodleapp:1.0
+    container_name: moodleapp
+    ports:
+      - "80:80"
+    volumes:
+      - moodledata:/var/www/moodledata
+    environment:
+      # Moodle DB settings (PostgreSQL)
+      MOODLE_DBTYPE: pgsql
+      MOODLE_DBHOST: ${PGHOST}        # z.B. mypg.postgres.database.azure.com
+      MOODLE_DBPORT: 5432
+      MOODLE_DBNAME: ${PGDATABASE}
+      MOODLE_DBUSER: ${PGUSER}        # meist user@servername
+      MOODLE_DBPASS: ${PGPASSWORD}
+    restart: unless-stopped
+
+volumes:
+  moodledata:
