@@ -56,7 +56,8 @@ RUN chown -R www-data:www-data /var/www/ && chmod -R 755 /var/www
 
 # Copy entrypoint script to start both Apache and cron
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+RUN sed -i 's/\r$//' /entrypoint.sh && chmod +x /entrypoint.sh
+
 
 # Expose port 80
 EXPOSE 80
