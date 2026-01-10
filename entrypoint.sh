@@ -32,19 +32,19 @@ if ! php /var/www/html/admin/cli/isinstalled.php --quiet >/dev/null 2>&1; then
   php /var/www/html/admin/cli/install.php \
     --agree-license \
     --lang=en \
-    --wwwroot="${MOODLE_WWWROOT:-http://localhost}" \
+    --wwwroot="$MOODLE_WWWROOT" \
     --dataroot="$DATAROOT" \
     --dbtype="${MOODLE_DBTYPE:-pgsql}" \
-    --dbhost="${MOODLE_DBHOST:-localhost}" \
+    --dbhost="$MOODLE_DBHOST" \
     --dbport="${MOODLE_DBPORT:-5432}" \
-    --dbname="${MOODLE_DBNAME:-moodle}" \
-    --dbuser="${MOODLE_DBUSER:-moodle}" \
-    --dbpass="${MOODLE_DBPASS:-}" \
+    --dbname="$MOODLE_DBNAME" \
+    --dbuser="$MOODLE_DBUSER" \
+    --dbpass="$MOODLE_DBPASS" \
     --fullname="${MOODLE_SITE_FULLNAME:-Moodle Site}" \
     --shortname="${MOODLE_SITE_SHORTNAME:-Moodle}" \
-    --adminuser="${MOODLE_ADMIN_USER}" \
-    --adminpass="${MOODLE_ADMIN_PASS}" \
-    --adminemail="${MOODLE_ADMIN_EMAIL}" \
+    --adminuser="${MOODLE_ADMIN_USER:?MOODLE_ADMIN_USER must be set}" \
+    --adminpass="${MOODLE_ADMIN_PASS:?MOODLE_ADMIN_PASS must be set}" \
+    --adminemail="${MOODLE_ADMIN_EMAIL:?MOODLE_ADMIN_EMAIL must be set}" \
     --non-interactive
 fi
 

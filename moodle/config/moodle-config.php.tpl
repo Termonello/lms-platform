@@ -7,7 +7,7 @@ $CFG = new stdClass();
 
 $CFG->dbtype = getenv('MOODLE_DBTYPE') ?: 'pgsql';
 $CFG->dblibrary = 'native';
-$CFG->dbhost = getenv('MOODLE_DBHOST') ?: 'localhost';
+$CFG->dbhost = getenv('MOODLE_DBHOST') ?: '';
 $CFG->dbname = getenv('MOODLE_DBNAME') ?: 'moodle';
 $CFG->dbuser = getenv('MOODLE_DBUSER') ?: 'moodle';
 $CFG->dbpass = getenv('MOODLE_DBPASS') ?: '';
@@ -15,8 +15,8 @@ $CFG->prefix = getenv('MOODLE_DBPREFIX') ?: 'mdl_';
 $CFG->dboptions = array(
     'dbpersist' => 0,
     'dbport' => getenv('MOODLE_DBPORT') ?: '5432',
-    'dbsocket' => '',
     'encoding' => 'utf8',
+    'sslmode' => 'require',
 );
 
 $CFG->wwwroot = getenv('MOODLE_WWWROOT') ?: 'http://localhost';
