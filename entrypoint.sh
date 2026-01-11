@@ -32,8 +32,7 @@ if ! php /var/www/html/admin/cli/isinstalled.php --quiet >/dev/null 2>&1; then
   php /var/www/html/admin/cli/install.php \
     --agree-license \
     --lang=en \
-    --wwwroot="$MOODLE_WWWROOT" \
-    --dataroot="$DATAROOT" \
+    --dataroot="$MOODLE_DATAROOT" \
     --dbtype="${MOODLE_DBTYPE:-pgsql}" \
     --dbhost="$MOODLE_DBHOST" \
     --dbport="${MOODLE_DBPORT:-5432}" \
