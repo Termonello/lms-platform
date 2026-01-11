@@ -33,7 +33,6 @@ if ! php /var/www/html/admin/cli/isinstalled.php --quiet >/dev/null 2>&1; then
   if [ -f "$CONFIG_FILE" ]; then
     php /var/www/html/admin/cli/install_database.php \
       --agree-license \
-      --non-interactive \
       --lang=en \
       --fullname="${MOODLE_SITE_FULLNAME:-Moodle Site}" \
       --shortname="${MOODLE_SITE_SHORTNAME:-Moodle}" \
