@@ -52,7 +52,7 @@ if [ ! -f "$DATAROOT/.installed" ]; then
     --shortname="${MOODLE_SITE_SHORTNAME:-Moodle}" \
     --adminuser="$MOODLE_ADMIN_USER" \
     --adminpass="$MOODLE_ADMIN_PASS" \
-    --adminemail="$MOODLE_ADMIN_EMAIL" \
+    --adminemail="$MOODLE_ADMIN_EMAIL"
 fi
 
 # Start cron (best effort)
