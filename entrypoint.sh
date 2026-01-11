@@ -7,6 +7,7 @@ set -euo pipefail
 CONFIG_TEMPLATE="/usr/local/etc/moodle-config.php.tpl"
 CONFIG_FILE="/var/www/html/config.php"
 DATAROOT="${MOODLE_DATAROOT:-/var/www/moodledata}"
+WWWROOT="${MOODLE_WWWROOT:-http://localhost}"
 
 # Copy config template if config.php does not exist
 if [ ! -f "$CONFIG_FILE" ] && [ -f "$CONFIG_TEMPLATE" ]; then
@@ -28,11 +29,19 @@ if ! php /var/www/html/admin/cli/isinstalled.php --quiet >/dev/null 2>&1; then
     echo "Missing database settings; set MOODLE_DBHOST/MOODLE_DBNAME/MOODLE_DBUSER." >&2
     exit 1
   fi
+
+if [ ! -f "$DATAROOT/.installed" ]; then
+  # install.php ausführen
+  touch "$DATAROOT/.installed"
+  fi
+
 # Run Moodle installation script
   php /var/www/html/admin/cli/install.php \
     --agree-license \
+    --non-interactive \
     --lang=en \
-    --dataroot="$MOODLE_DATAROOT" \
+    --wwwroot="$WWWROOT" \
+    --dataroot="$DATAROOT" \
     --dbtype="${MOODLE_DBTYPE:-pgsql}" \
     --dbhost="$MOODLE_DBHOST" \
     --dbport="${MOODLE_DBPORT:-5432}" \
@@ -41,10 +50,9 @@ if ! php /var/www/html/admin/cli/isinstalled.php --quiet >/dev/null 2>&1; then
     --dbpass="$MOODLE_DBPASS" \
     --fullname="${MOODLE_SITE_FULLNAME:-Moodle Site}" \
     --shortname="${MOODLE_SITE_SHORTNAME:-Moodle}" \
-    --adminuser="${MOODLE_ADMIN_USER:?MOODLE_ADMIN_USER must be set}" \
-    --adminpass="${MOODLE_ADMIN_PASS:?MOODLE_ADMIN_PASS must be set}" \
-    --adminemail="${MOODLE_ADMIN_EMAIL:?MOODLE_ADMIN_EMAIL must be set}" \
-    --non-interactive
+    --adminuser="$MOODLE_ADMIN_USER" \
+    --adminpass="$MOODLE_ADMIN_PASS" \
+    --adminemail="$MOODLE_ADMIN_EMAIL" \
 fi
 
 # Start cron (best effort)
