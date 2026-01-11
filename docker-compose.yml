@@ -16,7 +16,7 @@ services:
       MOODLE_DBNAME: ${PGDATABASE}
       MOODLE_DBUSER: ${PGUSER}        # meist user@servername
       MOODLE_DBPASS: ${PGPASSWORD}
-      MOODLE_WWWROOT: ${MOODLE_WWWROOT:-http://localhost}
+      MOODLE_WWWROOT: ${MOODLE_WWWROOT}
       MOODLE_DATAROOT: /var/www/moodledata
       MOODLE_ADMIN_USER: ${MOODLE_ADMIN_USER}
       MOODLE_ADMIN_PASS: ${MOODLE_ADMIN_PASS}
