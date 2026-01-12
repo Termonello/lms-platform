@@ -7,7 +7,7 @@ set -euo pipefail
 CONFIG_TEMPLATE="/usr/local/etc/moodle-config.php.tpl"
 CONFIG_FILE="/var/www/html/config.php"
 DATAROOT="${MOODLE_DATAROOT:-/var/www/moodledata}"
-WWWROOT="${MOODLE_WWWROOT:-http://localhost}"
+WWWROOT="${MOODLE_WWWROOT:-}"
 
 # Copy config template if config.php does not exist
 if [ ! -f "$CONFIG_FILE" ] && [ -f "$CONFIG_TEMPLATE" ]; then
@@ -43,6 +43,10 @@ if ! php /var/www/html/admin/cli/isinstalled.php --quiet >/dev/null 2>&1; then
       php /var/www/html/admin/cli/upgrade.php --non-interactive || true
     fi
   else
+    if [ -z "$WWWROOT" ]; then
+      echo "Missing MOODLE_WWWROOT for initial install; set it to your site URL." >&2
+      exit 1
+    fi
     php /var/www/html/admin/cli/install.php \
       --agree-license \
       --non-interactive \
