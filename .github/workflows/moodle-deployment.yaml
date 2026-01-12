@@ -58,7 +58,7 @@ jobs:
           tags: |
             ${{ env.MO_REGISTRY_URL }}/${{ env.MO_IMAGE_NAME }}:latest
             ${{ env.MO_REGISTRY_URL }}/${{ env.MO_IMAGE_NAME }}:${{ env.LAST_HASH }}
-#          build-args: VERSION=${{ env.VERSION }}
+          build-args: VERSION=${{ env.VERSION }}
       - id: releaseWithMogenius-309A084A1207AB26556C
         name: Release with mogenius
         uses: mogenius/mogenius-release-action@v1
