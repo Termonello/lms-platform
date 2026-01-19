@@ -31,7 +31,6 @@ RUN git clone --depth 1 --branch MOODLE_500_STABLE git://git.moodle.org/moodle.g
     && cp -a /tmp/moodle/. /var/www/html/ \
     && rm -rf /tmp/moodle
 
-# New comment line
 # Set PHP settings for Moodle: max_input_vars and OPcache
 # Set max_input_vars to handle large forms in Moodle
 RUN echo "max_input_vars=5000" >> /usr/local/etc/php/conf.d/docker-php-moodle.ini && \
